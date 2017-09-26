@@ -26,7 +26,7 @@ Tous les articles du blog
             </article>
         </div>
         @endforeach
-        {{ $articles->appends(['article'])->links() }}
+        {{ $articles->appends(Request::except('page'))->links() }}
     </div>
 </section>
 @endsection
