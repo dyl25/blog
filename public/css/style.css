@@ -1,0 +1,143 @@
+.grey {
+    background-color: #616161 ;
+    color: white;
+}
+
+.well-pad {
+    padding: 60px 50px
+}
+
+.front-thumb {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+}
+
+footer {
+    font-size: 20px;
+}
+
+footer p.reseau {
+    font-size : 35px;
+    color: white;
+}
+
+footer p.reseau a {
+    color: white;
+}
+
+.light-grey {
+    background-color: #f6f6f6;
+}
+
+/* Backoffice */
+
+.sidenav {
+    position: fixed;
+    padding: 0;
+    background-color: rgb(42, 63, 84);
+    height: 100%;
+}
+
+#mainSidebar {
+    padding: 0;
+}
+
+.profile-data {
+    margin-top: 50px;
+}
+
+.sidenav .profile-data .profile-picture {
+    width: 50%;
+    margin-top: 10px;
+}
+
+.sidenav .profile-data .profile-descr {
+    margin-top: 10px;
+}
+
+.sidenav .profile-data p {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .sidenav {
+        position: static;
+        text-align: center;
+    }
+}
+
+.sidenav ul.nav p {
+    padding: 10px 15px;
+    cursor: pointer;
+    /*margin: 0;*/
+}
+
+.sidenav ul ul.collapse a {
+    display: block;
+    text-decoration: none;
+}
+
+.sidenav a,.sidenav p {
+    color: rgb(26, 187, 156);
+    width: 100%;
+}
+
+.sidenav ul ul.collapse {
+    padding-left: 0;
+}
+
+.sidenav ul ul.collapse li {
+    padding-left: 40px;
+}
+
+.sidenav .navbar-collapse .active a,.sidenav .navbar-collapse .active p {
+    background-color: rgb(51, 69, 86);
+    border-bottom: 1px solid black;
+    border-left: 6px solid rgb(26, 187, 156);
+
+}
+
+.sidenav .navbar-collapse ul.nav > li > a:hover, .sidenav .navbar-collapse ul.nav p:hover, .sidenav ul ul.collapse li:hover{
+    background-color: rgb(51, 69, 86);
+    border-bottom: 1px solid rgb(26, 187, 156);
+}
+
+.sidenav .navbar-collapse ul.nav > li > a {
+    border-radius: 0;
+}
+
+.manage-command {
+    list-style-type: none;
+}
+
+.info-box-icon {
+    margin-right: 20px;
+    font-size: 40px;
+}
+.info-box-num {
+    font-size: 36px;
+    display: inline;
+}
+.info-box-text {
+    font-size: 18px;
+}
+
+.analytic-box {
+    /*max-height: 400px;
+    overflow: auto;*/
+}
+
+.action {
+    font-size: 20px;
+}
+
+.action .edit {
+    
+}
+
+.action .delete {
+    color: #f44336;
+}
+
+/* End backoffice*/
