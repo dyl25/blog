@@ -19,7 +19,7 @@ class ArticleController extends Controller {
 
         //initialisiation de la localisation pour traduire les dates
         \Carbon\Carbon::setLocale('fr');
-        return view('admin.article.index', compact('articles'));
+        return view('validateur.article.index', compact('articles'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ArticleController extends Controller {
     public function show($id) {
         $article = \App\Article::find($id);
 
-        return view('admin.article.show', compact('article'));
+        return view('validateur.article.show', compact('article'));
     }
 
 }
