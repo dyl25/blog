@@ -15,7 +15,7 @@ class ArticleController extends Controller {
      */
     public function index() {
 
-        $articles = \App\Article::paginate(5);
+        $articles = \App\Article::paginate(10);
 
         //initialisiation de la localisation pour traduire les dates
         \Carbon\Carbon::setLocale('fr');

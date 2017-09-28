@@ -13,7 +13,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $users = \App\User::paginate(5);
+        $users = \App\User::paginate(10);
 
         \Carbon\Carbon::setLocale('fr');
         //dd($users);
