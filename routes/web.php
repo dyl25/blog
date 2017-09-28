@@ -11,13 +11,15 @@
   |
  */
 
-Route::group(['middleware' => ['auth', 'checkRoleAdmin']], function() {
+Route::group(['middleware' => ['auth', 'checkRole']], function() {
     Route::match(['get', 'head'], '/backoffice/users/changePassword/{id}', 'admin\UserController@editPassword')->name('users.editPassword');
     Route::match(['put', 'patch'], '/backoffice/users/updatePassword/{id}', 'admin\UserController@updatePassword')->name('users.updatetPassword');
     Route::resource('/backoffice/articles', 'admin\ArticleController');
     Route::resource('/backoffice/users', 'admin\UserController');
     Route::get('/backoffice', 'admin\DashboardController@index')->name('backoffice');
 });
+
+Route::get('/validation', 'validator\DashboardController@index')->name('validation');
 
 Auth::routes();
 Route::get('/articles/search', 'ArticleController@search');

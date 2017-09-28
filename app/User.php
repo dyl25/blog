@@ -43,4 +43,8 @@ class User extends Authenticatable
         return $this->role->name == 'admin' || $this->role->name == 'validator';
     }
     
+    public function isRole($role) {
+        return $this->role->name == $role;
+    }
+    
 }

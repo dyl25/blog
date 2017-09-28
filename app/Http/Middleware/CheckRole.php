@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckRoleAdmin
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,11 @@ class CheckRoleAdmin
      */
     public function handle($request, Closure $next)
     {       
-        if(!$request->user()->isAdmin()) {
+        /*if(!$request->user()->isAdmin()) {
+            return redirect('home');
+        }*/
+        
+        if(!$request->user()->isRole('admin') || !$request->user()->isRole('validator')) {
             return redirect('home');
         }
         
