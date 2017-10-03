@@ -31,7 +31,7 @@
                         <div class="navbar-right">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="#">Accueil</a>
+                                    <a href="{{ route('home') }}">Accueil</a>
                                 </li>
                                 <li>
                                     <a href="#mainContact">Contact</a>

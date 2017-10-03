@@ -35,23 +35,12 @@
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{ route('home') }}" class="text-center"><span class="glyphicon glyphicon-home"></span> Accueil</a></li>
                                 <li class="active"><a href="{{ route('backoffice') }}"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-                                <li data-toggle="collapse" data-target="#usersGestion"><p><span class="glyphicon glyphicon-user"></span> Users <span class="glyphicon glyphicon-chevron-right"></span></p>
-                                    <ul id="usersGestion" class="collapse manage-command">
-                                        <li><a href="{{ route('users.create') }}">Ajouter</a></li>
-                                        <li><a href="{{ route('users.index') }}">Gérer</a></li>
-                                        <li><a href="#">Demande d'adhésion <span class="badge badge-error">2</span></a></li>
-                                    </ul>
-                                </li>
                                 <li data-toggle="collapse" data-target="#articleGestion"><p><span class="glyphicon glyphicon-th-list"></span> Articles <span class="glyphicon glyphicon-chevron-right"></span></p>
                                     <ul id="articleGestion" class="collapse manage-command">
-                                        <li><a href="{{ route('articles.create') }}">Ajouter</a></li>
-                                        <li><a href="{{ route('articles.index') }}">Gérer</a></li>
+                                        <li><a href="#">En attente</a></li>
+                                        <li><a href="#">Validé</a></li>
                                     </ul>
                                 </li>
-                                <li><p><span class="glyphicon glyphicon-calendar"></span> Evénements</p></li>
-                                <li><a href="#">Résultats</a></li>
-                                <li><a href="#">Entraînements</a></li>
-                                <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
                             </ul>
                         </div>
                     </nav>

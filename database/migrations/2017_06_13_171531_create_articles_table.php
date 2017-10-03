@@ -12,6 +12,7 @@ class CreateArticlesTable extends Migration {
      * @return void
      */
     public function up() {
+        Schema::dropIfExists('articles');
         Schema::create('articles', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
@@ -32,6 +33,10 @@ class CreateArticlesTable extends Migration {
      * @return void
      */
     public function down() {
+        Schema::table('articles', function ($table) {
+            $table->dropForeign('articles_category_id_foreign');
+            $table->dropForeign('articles_user_id_foreign');
+        });
         Schema::dropIfExists('articles');
     }
 
