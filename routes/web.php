@@ -20,6 +20,8 @@ Route::group(['middleware' => ['auth', 'checkRole']], function() {
 });
 
 Route::get('/validation', 'validator\DashboardController@index')->name('validation');
+Route::get('/validation/toValidate', 'validator\ArticleController@toValidate')->name('toValidate');
+Route::get('/validation/validated', 'validator\ArticleController@validated')->name('validated');
 
 Auth::routes();
 Route::get('/articles/search', 'ArticleController@search');

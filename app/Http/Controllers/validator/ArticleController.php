@@ -21,6 +21,16 @@ class ArticleController extends Controller {
         \Carbon\Carbon::setLocale('fr');
         return view('validateur.article.index', compact('articles'));
     }
+    
+    public function toValidate() {
+        $article = new \App\Article();
+        $articles = $article->toValidate();
+        dd($articles);
+    }
+    
+    public function validated() {
+        dd('ok validated');
+    }
 
     /**
      * Display the specified resource.

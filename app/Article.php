@@ -17,8 +17,24 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
     
+    /**
+     * Recherche un ou plusieur article par son titre
+     * @param type $query
+     * @param string $title Le titre de l'article.
+     * @return Collection Les articles correspondant à la recherche
+     */
     public function scopeSearchByTitle($query, $title) {
         return $query->where('title', 'LIKE', '%'.$title.'%');
+    }
+    
+    /**
+     * Récupère tous les articles à valider
+     * @return Collection Les articles à valider
+     */
+    public function toValidate() {
+        $articleIds = $this->pluck('id')->all();
+        
+        return $this->all()->whereNotIn('validations', $articleIds);
     }
     
 }

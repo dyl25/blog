@@ -37,8 +37,8 @@
                                 <li class="active"><a href="{{ route('backoffice') }}"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
                                 <li data-toggle="collapse" data-target="#articleGestion"><p><span class="glyphicon glyphicon-th-list"></span> Articles <span class="glyphicon glyphicon-chevron-right"></span></p>
                                     <ul id="articleGestion" class="collapse manage-command">
-                                        <li><a href="#">En attente</a></li>
-                                        <li><a href="#">Validé</a></li>
+                                        <li><a href="{{ route('toValidate') }}">En attente</a></li>
+                                        <li><a href="{{ route('validated') }}">Validé</a></li>
                                     </ul>
                                 </li>
                             </ul>

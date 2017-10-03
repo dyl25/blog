@@ -22,7 +22,6 @@ class ArticleController extends Controller
     public function search(Request $request) {
 
         $articles = \App\Article::searchByTitle($request['article'])->paginate(6);
-        //dd($articles);
         
         return view('article.all', compact('articles'));
     }
