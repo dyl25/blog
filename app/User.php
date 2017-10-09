@@ -35,6 +35,10 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
     
+    public function validations() {
+        return $this->hasMany(Validation::class);
+    }
+    
     public function publish(Article $article) {
         $this->articles()->save($article);
     }

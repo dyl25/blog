@@ -19,24 +19,19 @@ Articles à valider
             </tr>
         </thead>
         <tbody>
-            @foreach($articles as $article)
+            @foreach($articles as $articleData)
             <tr>
-                <td>{{ $article->id }}</td>
-                <td><a href="{{ route('articles.show', $article->id)  }}">{{ $article->title }}</a></td>
-                <td>{{ $article->user->name }}</td>
-                <td>{{ $article->created_at->toFormattedDateString() }}</td>
+                <td>{{ $articleData->id }}</td>
+                <td><a href="{{ route('articles.show', $articleData->id)  }}">{{ $articleData->title }}</a></td>
+                <td>{{ $articleData->user->name }}</td>
+                <td>{{ $articleData->created_at->toFormattedDateString() }}</td>
                 <td class="action">
-                    <a href="{{ route('articles.edit', $article->id)  }}"><i class="glyphicon glyphicon-pencil action" data-toggle="tooltip" data-placement="top" title="Editer"></i></a>
-                    {!! Form::open(['method' => 'DELETE', 'url' => 'validator/articles/'.$article->id])  !!}
-                    <!--<a href="#"><i class="glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="bottom" title="Supprimer"></i></a>-->
-                    {!! Form::submit('Refuser', ['class' => 'btn btn-danger']) !!}
-                    {!! Form::close()  !!}
+                    <a href="{{ route('validation.edit', $articleData->id) }}" class="btn btn-danger">Refuser</a>
                 </td>
             </tr>
             @endforeach
         </tbody>
         
     </table>
-    {{ $articles->links() }}
 </div>
 @endsection
