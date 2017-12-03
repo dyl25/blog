@@ -36,7 +36,7 @@ class User extends Authenticatable
     }
     
     public function validations() {
-        return $this->hasMany(Validation::class);
+        return $this->hasMany(Validation::class, 'validator_id');
     }
     
     public function publish(Article $article) {

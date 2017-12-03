@@ -19,7 +19,7 @@ class CheckRole
             return redirect('home');
         }*/
         
-        if(!$request->user()->isRole('admin') || !$request->user()->isRole('validator')) {
+        if(!$request->user()->isRole('admin') && !$request->user()->isRole('validator')) {
             return redirect('home');
         }
         

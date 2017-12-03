@@ -37,10 +37,12 @@ class Article extends Model {
      * @return Collection Les articles à valider
      */
     public function toValidate() {
+        
         //articles déja validé
         $validatedArticleIds = DB::table('validations')
                 ->pluck('article_id')
                 ->all();
+        
         //dd($validatedArticleIds);
         return $this->all()->whereNotIn('id', $validatedArticleIds);
     }

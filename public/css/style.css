@@ -132,9 +132,9 @@ footer p.reseau a {
     font-size: 20px;
 }
 
-.action .edit {
+/*.action .edit {
     
-}
+}*/
 
 .action .delete {
     color: #f44336;
@@ -143,7 +143,5 @@ footer p.reseau a {
 /* End backoffice*/
 
 /* Validation */
-.sidenavValidation {
-    
-}
+
 /* End validation */

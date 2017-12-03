@@ -21,50 +21,107 @@ class ArticleController extends Controller {
         \Carbon\Carbon::setLocale('fr');
         return view('validateur.article.index', compact('articles'));
     }
-    
+
+    /**
+     * Affiche tous les articles à valider
+     * @return \Illuminate\Http\Response
+     */
     public function toValidate() {
         $article = new \App\Article();
         $articles = $article->toValidate();
 
         return view('validator.article.toValidate', compact('articles'));
     }
-    
+
+    /**
+     * Affiche l'article pour une validation
+     * @param type $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id) {
-        $articleData = \App\Article::find($id);
+        $articleData = \App\Article::findOrFail($id);
         $validation = new \App\Validation();
         //permet l'affichage du bouton pour la validation
         $articleValidated = $validation->isValidated($id);
-        
+
         return view('validator.article.edit', compact('articleData', 'articleValidated'));
     }
-    
+
+    /**
+     * Permet de valider ou non l'article
+     * @param Request $request
+     * @param type $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id) {
-        $article = \App\Article::find($id);
-        
+        $article = \App\Article::findorFail($id);
+
         $this->validate($request, [
             'justification' => 'required'
         ]);
-        
+
         $validation = new \App\Validation([
             'article_id' => $article->id,
             'validator_id' => Auth::id(),
             'status' => '0',
             'justification' => $request['justification']
         ]);
-        
+
         $validation->save();
-        
+
         session()->flash('notification', "L'article a bien été refusé");
-        
+
         return redirect('validation/toValidate');
-    }
-    
-    public function validated() {
-        dd('ok validated');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche tous les articles validés par le validateur en cours
+     * @return \Illuminate\Http\Response
+     */
+    public function validated() {
+        $user = new \App\User();
+        $validatedByUser = $user->find(Auth::id())->validations;
+        //dd($validatedByUser);
+
+        return view('validator.article.validated', compact('validatedByUser'));
+    }
+
+    /**
+     * Permet au validateur de modifier une de ses validations
+     * @param Request $request
+     * @param type $id
+     * @return \Illuminate\Http\Response
+     */
+    public function changeStatus(Request $request, $id) {
+        $validation = \App\Validation::find($id);
+
+        if (Auth::id() !== $validation->validator_id) {
+            session()->flash('notification', "Cet article n'a pas été validé par vous.");
+            redirect('/validation/validated');
+        }
+
+        $this->validate($request, [
+            'status' => 'required|integer|min:0|max:1'
+        ]);
+
+        if ($request['status'] == $validation->status) {
+            session()->flash('notification', "Cet article possède déjà ce status.");
+            redirect('/validation/validated');
+        }
+
+        $validation = new \App\Validation([
+            'status' => $request['status'],
+        ]);
+
+        $validation->save();
+
+        session()->flash('notification', "Le status de l'article a bien été changé");
+
+        return redirect('validation/validated');
+    }
+
+    /**
+     * Affiche les détails d'un article
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

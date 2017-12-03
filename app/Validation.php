@@ -17,11 +17,11 @@ class Validation extends Model
     }
     
     /**
-     * 
+     * Vérifie qu'un article a déjà été validé ou non
      * @param int $id L'id de l'article.
      * @return bool true si validé sinon false
      */
     public function isValidated($id) {
-        return $this->whereIn('id', [$id])->count() == 1;
+        return $this->whereIn('article_id', [$id])->count() == 1;
     }
 }
