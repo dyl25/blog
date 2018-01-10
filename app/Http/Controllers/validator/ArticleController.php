@@ -5,6 +5,9 @@ namespace App\Http\Controllers\validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Article;
+use App\Validation;
+use App\User;
 
 class ArticleController extends Controller {
 
@@ -15,7 +18,7 @@ class ArticleController extends Controller {
      */
     public function index() {
 
-        $articles = \App\Article::paginate(10);
+        $articles = Article::paginate(10);
 
         //initialisiation de la localisation pour traduire les dates
         \Carbon\Carbon::setLocale('fr');
@@ -27,7 +30,7 @@ class ArticleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function toValidate() {
-        $article = new \App\Article();
+        $article = new Article();
         $articles = $article->toValidate();
 
         return view('validator.article.toValidate', compact('articles'));
@@ -38,9 +41,9 @@ class ArticleController extends Controller {
      * @param type $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        $articleData = \App\Article::findOrFail($id);
-        $validation = new \App\Validation();
+    public function create($id) {
+        $articleData = Article::findOrFail($id);
+        $validation = new Validation();
         //permet l'affichage du bouton pour la validation
         $articleValidated = $validation->isValidated($id);
 
@@ -53,21 +56,27 @@ class ArticleController extends Controller {
      * @param type $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $article = \App\Article::findorFail($id);
+    public function store(Request $request, Article $article) {
 
         $this->validate($request, [
-            'justification' => 'required'
+            'status' => 'required|integer|min:0|max:1'
         ]);
 
-        $validation = new \App\Validation([
+        //si l'article est refusé le validateur doit fournir une justification
+        if ($request['status'] == 0) {
+            $this->validate($request, [
+                'justification' => 'required'
+            ]);
+        }
+
+        Validation::create([
             'article_id' => $article->id,
             'validator_id' => Auth::id(),
-            'status' => '0',
+            'status' => $request['status'],
             'justification' => $request['justification']
         ]);
 
-        $validation->save();
+        //$validation->save();
 
         session()->flash('notification', "L'article a bien été refusé");
 
@@ -79,11 +88,25 @@ class ArticleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function validated() {
-        $user = new \App\User();
+        $user = new User();
         $validatedByUser = $user->find(Auth::id())->validations;
         //dd($validatedByUser);
 
         return view('validator.article.validated', compact('validatedByUser'));
+    }
+
+    /**
+     * Affiche l'article pour mettre à jour la validation
+     * @param type $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Validation $validation) {
+        //$articleData = Article::findOrFail($id);
+        //$validation = new Validation();
+        //permet l'affichage du bouton pour la validation
+        $articleValidated = $validation->isValidated($validation->article_id);
+
+        return view('validator.article.showUpdate', compact('validation', 'articleValidated'));
     }
 
     /**
@@ -92,8 +115,8 @@ class ArticleController extends Controller {
      * @param type $id
      * @return \Illuminate\Http\Response
      */
-    public function changeStatus(Request $request, $id) {
-        $validation = \App\Validation::find($id);
+    public function update(Request $request, Validation $validation) {
+        //$validation = Validation::find($id);
 
         if (Auth::id() !== $validation->validator_id) {
             session()->flash('notification', "Cet article n'a pas été validé par vous.");
@@ -109,7 +132,7 @@ class ArticleController extends Controller {
             redirect('/validation/validated');
         }
 
-        $validation = new \App\Validation([
+        $validation = new Validation([
             'status' => $request['status'],
         ]);
 
@@ -126,8 +149,8 @@ class ArticleController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $article = \App\Article::find($id);
+    public function show(Article $article) {
+        //$article = \App\Article::find($id);
 
         return view('validateur.article.show', compact('article'));
     }

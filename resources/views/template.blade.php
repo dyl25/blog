@@ -39,6 +39,9 @@
                                 <li>
                                     <a href="{{ action('ArticleController@all') }}">Articles</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('validation') }}">Espace validation</a>
+                                </li>
                                 <!-- Authentication Links -->
                                 @if (Auth::guest())
                                 <li><a href="{{ route('login') }}">Login</a></li>

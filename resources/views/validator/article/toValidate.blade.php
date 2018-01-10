@@ -8,6 +8,7 @@ Articles à valider
 
 <div class="well analytic-box">
     <h2>Liste des articles</h2>
+    <div class="alert alert-info" role="alert">Liste des articles ayant encore besoin d'une validation</div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -26,7 +27,11 @@ Articles à valider
                 <td>{{ $articleData->user->name }}</td>
                 <td>{{ $articleData->created_at->toFormattedDateString() }}</td>
                 <td class="action">
-                    <a href="{{ route('validation.edit', $articleData->id) }}" class="btn btn-danger">Refuser</a>
+                    {!! Form::open(['method' => 'POST', 'url' => '/validation/store/'.$articleData->id])  !!}
+                    {!! Form::hidden('status', 1) !!}
+                    {!! Form::submit('Accepter', ['class' => 'btn btn-success']) !!}
+                    {!! Form::close()  !!}
+                    <a href="{{ route('validation.create', $articleData->id) }}" class="btn btn-danger">Refuser</a>
                 </td>
             </tr>
             @endforeach

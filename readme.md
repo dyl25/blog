@@ -1,3 +1,8 @@
+## Projet Blog
+
+Blog sur lequel différents articles peuvent être créé.
+Les articles peuvent êtres validés par un admin ou des utilisateurs peuvent être promu au rôle de validateur qui se chargeront de valider les différents contenus afin de diviser la charge de travail.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

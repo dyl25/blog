@@ -22,7 +22,7 @@ class CreateValidationsTable extends Migration
             $table->integer('validator_id')->unsigned();
             $table->foreign('validator_id')->references('id')->on('users');
             $table->tinyInteger('status');
-            $table->text('justification');
+            $table->text('justification')->nullable();
             $table->timestamps();
         });
     }
